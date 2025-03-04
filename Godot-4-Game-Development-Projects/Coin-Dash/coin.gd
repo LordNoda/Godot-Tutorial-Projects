@@ -12,5 +12,5 @@ func _process(delta):
 	pass
 
 
-func pickip():
+func pickup():
 	queue_free(); # Queue free removes the node in godot (This also removes it from memory)
