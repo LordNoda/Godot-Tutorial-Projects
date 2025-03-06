@@ -2,6 +2,8 @@ extends Node
 
 # exports
 @export var coin_scene : PackedScene;
+@export var powerup_scene : PackedScene;
+@export var cactus_scene : PackedScene;
 @export var playtime = 30;
 
 # scene variables
@@ -48,7 +50,10 @@ func spawn_coins():
 		add_child(c); # adds the packed scene as a child to the current node
 		c.screensize = screensize;
 		c.position = Vector2(randi_range(0, screensize.x),randi_range(0, screensize.y)); #Place it somewhere on screen
+	$PowerUpTimer.wait_time = randi_range(2,5);
+	$PowerUpTimer.start();
 
+			
 # This procs every 1 second continuously
 func _on_game_timer_timeout():
 	time_left -= 1;
@@ -69,11 +74,26 @@ func _on_player_hurt():
 	game_over(); # End game when hurt
 
 # Connects to player pick up signal, will fire when emitted
-func _on_player_pickup():
-	$CoinSound.play();
-	score += 1;
-	$HUD.update_score(score); # Update HUD
+func _on_player_pickup(type):
+	
+	match type:
+		"coin":
+			$CoinSound.play();
+			score += 1;
+			$HUD.update_score(score); # Update HUD
+		"powerup":
+			$PowerupSound.play();
+			score += 10;
+			time_left += 10;
+			$HUD.update_score(score); # Update HUD
 
 # Connects to the button signal, when button is pressed
 func _on_hud_start_game():
 	new_game();
+
+# Spawns the power up
+func _on_power_up_timer_timeout():
+	var power_up = powerup_scene.instantiate();
+	add_child(power_up);
+	power_up.screensize = screensize;
+	power_up.position = Vector2(randi_range(0, screensize.x), randi_range(0, screensize.y));

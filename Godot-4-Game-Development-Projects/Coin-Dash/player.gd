@@ -48,10 +48,13 @@ func die():
 
 func _on_area_entered(area):
 	# When hitting something we follow a logic route (2 separate if's here mean both can occur)
-	
 	if area.is_in_group("coins"):
 		area.pickup(); # Execute area.pickup method
-		pickup.emit(); # Emit the pickup signal
+		pickup.emit("coin"); # Emit the pickup signal
+		
+	if area.is_in_group("powerups"):
+		area.pickup(); # Execute area.pickup method
+		pickup.emit("powerup"); # Emit the pickup signal
 		
 	if area.is_in_group("obstacles"):
 		hurt.emit(); # emit the hurt signal

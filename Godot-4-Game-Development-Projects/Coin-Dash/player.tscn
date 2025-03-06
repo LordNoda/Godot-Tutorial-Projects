@@ -71,7 +71,7 @@ animations = [{
 [sub_resource type="RectangleShape2D" id="RectangleShape2D_o1v5p"]
 size = Vector2(28, 43)
 
-[node name="Player" type="Area2D"]
+[node name="Player" type="Area2D" groups=["player"]]
 script = ExtResource("1_j21h7")
 metadata/_edit_group_ = true
 
