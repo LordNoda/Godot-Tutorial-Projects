@@ -26,6 +26,8 @@ stretch_mode = 1
 
 [node name="Player" parent="." instance=ExtResource("2_ngs1b")]
 
+[node name="Coin" parent="." instance=ExtResource("3_f7kl1")]
+
 [node name="HUD" parent="." instance=ExtResource("5_c61kd")]
 
 [node name="CoinSound" type="AudioStreamPlayer" parent="."]
